@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import pl.fis.artur.kasza.entity.Author;
+import pl.fis.artur.kasza.entity.Country;
+import pl.fis.artur.kasza.entity.City;
 
 @Singleton
 public class DSManager {
@@ -25,5 +27,15 @@ public class DSManager {
 			a.setLastName("Sandler");
 			this.em.persist(a);
 		}
+		Country poland = new Country();
+		
+		poland.setName("Poland");
+		poland.setPrefix("+48");
+		City c = new City();
+		c.setName("Warszawa");
+		c.setCountry(poland);
+		
+		em.persist(poland);
+		em.persist(c);
 	} 
 }

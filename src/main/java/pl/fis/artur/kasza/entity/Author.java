@@ -2,6 +2,7 @@ package pl.fis.artur.kasza.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Path;
@@ -10,7 +11,7 @@ import javax.ws.rs.Path;
 @Path("author")
 public class Author extends AbstractEntity{
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotNull
 	private String firstName;
