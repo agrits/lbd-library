@@ -1,22 +1,26 @@
 package pl.fis.artur.kasza.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Survey extends AbstractEntity{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  
+
 	private long id;
 	
 	@NotNull
 	@ManyToOne
-	private User user;
+	private LibraryUser user;
 	
 	@NotNull
 	private String question;
@@ -25,7 +29,9 @@ public class Survey extends AbstractEntity{
 	private String answer;
 	
 	@NotNull
-	private LocalDateTime date;
+	@JsonbDateFormat("dd-MM-yyyy")
+
+	private LocalDate date;
 
 	public long getId() {
 		return id;
@@ -35,11 +41,11 @@ public class Survey extends AbstractEntity{
 		this.id = id;
 	}
 
-	public User getUser() {
+	public LibraryUser getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(LibraryUser user) {
 		this.user = user;
 	}
 
@@ -59,11 +65,11 @@ public class Survey extends AbstractEntity{
 		this.answer = answer;
 	}
 
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {  
 		this.date = date;
 	}
 	

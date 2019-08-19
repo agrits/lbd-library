@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 public class Author extends AbstractEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private long id;
 	@NotNull
 	private String firstName;

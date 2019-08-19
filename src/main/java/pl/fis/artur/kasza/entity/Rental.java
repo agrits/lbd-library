@@ -1,29 +1,42 @@
 package pl.fis.artur.kasza.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Rental extends AbstractEntity{
 
-	@NotNull
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private long id;
 	
 	@NotNull
 	@ManyToOne
 	private Book book;
 	
+	@ManyToOne
 	@NotNull
-	private LocalDateTime startDate;
-	
+	private LibraryUser user;
+	  
 	@NotNull
-	private LocalDateTime endDate;
+	@JsonbDateFormat("dd-MM-yyyy")
+	private LocalDate startDate;
 	
-	private LocalDateTime returnedDate;
+	@JsonbDateFormat("dd-MM-yyyy")
+	@NotNull
+	private LocalDate endDate;
+	 
+	@JsonbDateFormat("dd-MM-yyyy")
+	private LocalDate returnedDate;
 
 	public long getId() {
 		return id;
@@ -41,29 +54,38 @@ public class Rental extends AbstractEntity{
 		this.book = book;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LibraryUser getUser() {
+		return user;
+	}
+
+	public void setUser(LibraryUser user) {
+		this.user = user;
+	}
+
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public LocalDateTime getReturnedDate() {
+	public LocalDate getReturnedDate() {
 		return returnedDate;
 	}
 
-	public void setReturnedDate(LocalDateTime returnedDate) {
+	public void setReturnedDate(LocalDate returnedDate) {
 		this.returnedDate = returnedDate;
 	}
+
 	
 	
 }

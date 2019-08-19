@@ -3,16 +3,19 @@ package pl.fis.artur.kasza.entity;
 import java.time.LocalDateTime;
 
 import javax.json.bind.annotation.JsonbDateFormat;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-public class User extends AbstractEntity{
+@Entity
+public class LibraryUser extends AbstractEntity{
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	
 	private long id;
 	
 	@NotNull
@@ -31,7 +34,7 @@ public class User extends AbstractEntity{
 	private String passHash;
 	
 	@NotNull
-	@JsonbDateFormat(value = "dd-MM-yyyy")
+	@JsonbDateFormat("dd-MM-yyyy")
 	private LocalDateTime birthdate;
 	
 	@NotNull

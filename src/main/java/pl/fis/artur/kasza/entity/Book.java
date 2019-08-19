@@ -2,11 +2,22 @@ package pl.fis.artur.kasza.entity;
 
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Book extends AbstractEntity{
+	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	
 	private long id;
 	
@@ -16,21 +27,23 @@ public class Book extends AbstractEntity{
 	@NotNull
 	private String title;
 	
+	
 	@NotNull
-	@ManyToMany
-	private List<Author> authors;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Author> authors;
 	
 	@NotNull
 	private String ISBN;
 	
+	@Column(columnDefinition = "TEXT") 
 	private String description;
 	
 	@NotNull
 	private short year;
 	
 	@NotNull
-	@ManyToMany
-	private List<Category> categories;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Category> categories;
 
 	public long getId() {
 		return id;
@@ -56,11 +69,11 @@ public class Book extends AbstractEntity{
 		this.title = title;
 	}
 
-	public List<Author> getAuthors() {
+	public Set<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(List<Author> authors) {
+	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
 
@@ -88,11 +101,11 @@ public class Book extends AbstractEntity{
 		this.year = year;
 	}
 
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<Category> categories) {
+	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
 	

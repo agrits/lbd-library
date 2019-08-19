@@ -31,7 +31,7 @@ public abstract class AbstractResource<T extends AbstractEntity>{
 	
 	@Inject
 	DSManager dsManager;
-	private EntityManager em;
+	protected EntityManager em;
 	
 	@Resource
 	UserTransaction userTransaction;
@@ -39,11 +39,14 @@ public abstract class AbstractResource<T extends AbstractEntity>{
 	@SuppressWarnings("unchecked")
 	@GET
 	public List<T> getAll(@DefaultValue("id") @QueryParam("sort_by") String sortBy,
-						@DefaultValue("asc") @QueryParam("mode") String mode){
+						@DefaultValue("asc") @QueryParam("mode") String mode,
+						@DefaultValue("1=1") @QueryParam("filter_by") String filterBy){
 		return (List<T>) dsManager.getEntityManager()
 								.createQuery("SELECT x from "+
 											getType().getName()+
-											" x ORDER BY x."+
+											" x WHERE "+
+											filterBy +
+											" ORDER BY x."+
 											sortBy+" "+
 											mode)
 								.getResultList();
@@ -91,7 +94,7 @@ public abstract class AbstractResource<T extends AbstractEntity>{
 		}
 		
 		return instance;
-	}
+	} 
 	
 	@DELETE
 	@Path("{id}")

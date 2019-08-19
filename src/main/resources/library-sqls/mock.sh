@@ -1,0 +1,12 @@
+export PGPASSWORD=toor;
+psql -U postgres -d library -a -f category.sql;
+psql -U postgres -d library -a -f country.sql;
+psql -U postgres -d library -a -f city.sql;
+psql -U postgres -d library -a -f address.sql;
+psql -U postgres -d library -a -f author.sql;
+psql -U postgres -d library -a -f book.sql;
+psql -U postgres -d library -a -f libraryuser.sql;
+psql -U postgres -d library -a -f survey.sql;
+psql -U postgres -d library -a -f rental.sql;
+psql -U postgres -d library -a -f book_author.sql;
+psql -U postgres -d library -a -f book_category.sql;
